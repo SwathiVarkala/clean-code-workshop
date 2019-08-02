@@ -32,4 +32,18 @@ public class CustomerTest {
                 "Amount owed is 3.5\n" +
                 "You earned 2 frequent renter points");
     }
+
+    @Test
+    public void shouldReturnHtmlStatement(){
+        Customer customer = new Customer("Swathi");
+        customer.addRental(new Rental(new Movie("Okkadu", 0), 2));
+        customer.addRental(new Rental(new Movie("Om", 2), 1));
+        String statement = customer.htmlStatement();
+        Assert.assertEquals("<h3>Rental Record for <b>Swathi</b></h3>" +
+                "<p>Okkadu<b>2.0</b><br>" +
+                "Om<b>1.5</b><br>" +
+                "Amount owed is <b>3.5</b><br>" +
+                "You earned <b>2</b> frequent renter points</p>",
+                statement);
+    }
 }
