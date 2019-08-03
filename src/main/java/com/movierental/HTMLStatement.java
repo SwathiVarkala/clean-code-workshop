@@ -13,7 +13,7 @@ public class HTMLStatement {
     public String statement() {
         String statement = "<h3>Rental Record for <b>" + customerName + "</b></h3><p>";
         for (Rental rental : rentals) {
-            statement += rental.getMovie().getTitle() + "<b>" + rental.amount() + "</b><br>";
+            statement += rental.getMovie().getTitle() + "<b>" + rental.movie.amount(rental.getDaysRented()) + "</b><br>";
         }
 
         statement += "Amount owed is <b>" + rentals.totalRentalAmount() + "</b><br>";

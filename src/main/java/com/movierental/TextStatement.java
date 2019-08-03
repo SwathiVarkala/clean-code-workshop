@@ -12,7 +12,7 @@ public class TextStatement {
     public String statement() {
         String statement = "Rental Record for " + name + "\n";
         for (Rental rental : rentals) {
-            statement += "\t" + rental.getMovie().getTitle() + "\t" + rental.amount() + "\n";
+            statement += "\t" + rental.getMovie().getTitle() + "\t" + rental.movie.amount(rental.getDaysRented()) + "\n";
         }
 
         statement += "Amount owed is " + rentals.totalRentalAmount() + "\n";
