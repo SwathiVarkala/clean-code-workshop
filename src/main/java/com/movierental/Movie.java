@@ -2,16 +2,40 @@ package com.movierental;
 
 public class Movie {
 
-  private String title;
-  private PriceCode priceCode;
+  public static final int CHILDRENS = 2;
+  public static final int REGULAR = 0;
+  public static final int NEW_RELEASE = 1;
 
-  public Movie(String title, PriceCode priceCode) {
+  private String title;
+  private MovieType movieType;
+
+  public Movie(String title, int priceCode) {
     this.title = title;
-    this.priceCode = priceCode;
+    setMovieType(priceCode);
   }
 
-  public PriceCode getPriceCode() {
-    return priceCode;
+  public void setPriceCode(int priceCode) {
+    setMovieType(priceCode);
+  }
+
+  public MovieType getMovieType() {
+    return movieType;
+  }
+
+  private void setMovieType(int movieType) {
+    switch (movieType) {
+      case Movie.REGULAR:
+        this.movieType = new RegularMovieType();
+        break;
+      case Movie.NEW_RELEASE:
+        this.movieType = new NewReleaseMovieType();
+        break;
+      case Movie.CHILDRENS:
+        this.movieType = new ChildrenMovieType();
+        break;
+      default:
+        this.movieType = new UnKnownMovieType();
+    }
   }
 
   public String getTitle() {
@@ -19,34 +43,10 @@ public class Movie {
   }
 
   double amount(int daysRented) {
-      double amount = 0;
-      switch (this.getPriceCode()) {
-          case REGULAR:
-              amount += 2;
-              if (daysRented > 2)
-                  amount += (daysRented - 2) * 1.5;
-              break;
-          case NEW_RELEASE:
-              amount += daysRented * 3;
-              break;
-          case CHILDRENS:
-              amount += 1.5;
-              if (daysRented > 3)
-                  amount += (daysRented - 3) * 1.5;
-              break;
-      }
-      return amount;
+      return movieType.amount(daysRented);
   }
 
   int frequentRenterPoints(int daysRented) {
-      int frequentRenterPoints = 1;
-      if (isBonusApplicable(daysRented))
-          frequentRenterPoints++;
-      return frequentRenterPoints;
+    return movieType.frequentRenterPoints(daysRented);
   }
-
-  private boolean isBonusApplicable(int daysRented) {
-      return (getPriceCode() == PriceCode.NEW_RELEASE) && daysRented > 1;
-  }
-
 }

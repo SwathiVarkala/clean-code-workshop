@@ -10,6 +10,10 @@ public class Rental {
         this.daysRented = daysRented;
     }
 
+    double amount() {
+        return movie.amount(daysRented);
+    }
+
     public int getDaysRented() {
         return daysRented;
     }
