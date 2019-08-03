@@ -8,9 +8,9 @@ public class CustomerTest {
     @Test
     public void shouldReturnStatement(){
         Customer customer = new Customer("Swathi");
-        customer.addRental(new Rental(new Movie("Okkadu", 0), 10));
-        customer.addRental(new Rental(new Movie("One", 1), 10));
-        customer.addRental(new Rental(new Movie("Om", 2), 10));
+        customer.rentals.add(new Rental(new Movie("Okkadu", 0), 10));
+        customer.rentals.add(new Rental(new Movie("One", 1), 10));
+        customer.rentals.add(new Rental(new Movie("Om", 2), 10));
         String statement = customer.statement();
         Assert.assertEquals(statement, "Rental Record for Swathi\n" +
                 "\tOkkadu\t14.0\n" +
@@ -23,8 +23,8 @@ public class CustomerTest {
     @Test
     public void shouldReturnStatementForDifferentDaysRented(){
         Customer customer = new Customer("Swathi");
-        customer.addRental(new Rental(new Movie("Okkadu", 0), 2));
-        customer.addRental(new Rental(new Movie("Om", 2), 1));
+        customer.rentals.add(new Rental(new Movie("Okkadu", 0), 2));
+        customer.rentals.add(new Rental(new Movie("Om", 2), 1));
         String statement = customer.statement();
         Assert.assertEquals(statement, "Rental Record for Swathi\n" +
                 "\tOkkadu\t2.0\n" +
@@ -36,8 +36,8 @@ public class CustomerTest {
     @Test
     public void shouldReturnHtmlStatement(){
         Customer customer = new Customer("Swathi");
-        customer.addRental(new Rental(new Movie("Okkadu", 0), 2));
-        customer.addRental(new Rental(new Movie("Om", 2), 1));
+        customer.rentals.add(new Rental(new Movie("Okkadu", 0), 2));
+        customer.rentals.add(new Rental(new Movie("Om", 2), 1));
         String statement = customer.htmlStatement();
         Assert.assertEquals("<h3>Rental Record for <b>Swathi</b></h3>" +
                 "<p>Okkadu<b>2.0</b><br>" +
